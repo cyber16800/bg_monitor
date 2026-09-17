@@ -1,4 +1,4 @@
 sqlobject
 flask
 requests
-uuid
+# uuid
