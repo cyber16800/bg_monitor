@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <title>cyberbase login</title>
+</head>
+
+<body>
+    {% if step == 1 %}
+        <form method="post">
+            <div class="login">
+                <div class="banner"></div>
+                <!-- username password POST -->
+                <p>Se connecter :</p>
+                <input spellcheck="false" class="text" type="text" name="username" placeholder="nom d'utilisateur" required/>
+                <!-- <input spellcheck="false" class="text" type="password" name="password" placeholder="mot de passe" disabled/> -->
+                <div class="buttons">
+                    <input class="button" type="submit" value="Suivant" />
+                </div>
+            </div>
+        </form>
+    {% elif step == 2 %}
+        <form method="post">
+            <div class="login">
+                <div class="banner"></div>
+                <!-- username password POST -->
+                <p>Se connecter :</p>
+                <input spellcheck="false" class="text" type="text" value="{{username}}" name="username" placeholder="nom d'utilisateur" disable/>
+                <input spellcheck="false" class="text" type="password" name="password" placeholder="mot de passe" required/>
+                <div class="buttons">
+                    <input class="button" type="submit" value="Se connecter" />
+                </div>
+            </div>
+        </form>
+    {% elif step == 3 %}
+        <form method="post">
+            <div class="login">
+                <div class="banner"></div>
+                <!-- username password POST -->
+                <p>Créer un mot de passe :</p>
+                <input spellcheck="false" class="text" type="text" value="{{username}}" name="username" placeholder="nom d'utilisateur" disabled/>
+                <input spellcheck="false" class="text" type="password" name="password" placeholder="mot de passe" required/>
+                <div class="buttons">
+                    <input class="button" type="submit" value="Valider" />
+                </div>
+            </div>
+        </form>
+    {% elif step == 4 %}
+        <form method="post">
+            <div class="login">
+                <div class="banner"></div>
+                <!-- username password POST -->
+                <p>Se connecter :</p>
+                <input spellcheck="false" class="text" type="text" name="username" placeholder="nom d'utilisateur" required/>
+                <!-- <input spellcheck="false" class="text" type="password" name="password" placeholder="mot de passe" disabled/> -->
+                <div class="buttons">
+                    <input class="button" type="submit" value="Suivant" />
+                </div>
+            </div>
+        </form>
+    {% endif %}
+</body>
+
+</html>

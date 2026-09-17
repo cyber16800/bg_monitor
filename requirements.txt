@@ -1,0 +1,4 @@
+sqlobject
+flask
+requests
+uuid
