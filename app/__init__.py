@@ -55,6 +55,8 @@ def index():
                 if not check_data.count():
                     BackgroundsList(image=data_url)
                     message = "Validé"
+                else:
+                    message = "Déjà ajouté!"
                 images = BackgroundsList.select()
                 selected = GlobalSettings.select()
                 if selected.count():
@@ -87,17 +89,29 @@ def bg():
 
 @app.route("/bg/<id>/", methods=["GET"])
 def bg_select(id):
-    image = BackgroundsList.selectBy(id = id)
-    if image.count():
-        global_settings = GlobalSettings.select()
-        if global_settings.count():
-            global_settings[0].selectedImage = int(id)
-            return redirect(url_for("index"))
+    if "userId" in session:
+        image = BackgroundsList.selectBy(id = id)
+        if image.count():
+            global_settings = GlobalSettings.select()
+            if global_settings.count():
+                global_settings[0].selectedImage = int(id)
+                return redirect(url_for("index"))
+            else:
+                GlobalSettings(selectedImage = -1)
+                return redirect()
         else:
-            GlobalSettings(selectedImage = -1)
-            return redirect()
-    else:
-        return "Not Found"
+            return "Not Found"
+    return redirect(url_for("index"))
+
+@app.route("/bg/<id>/remove/", methods=["GET"])
+def bg_remove(id):
+    if "userId" in session:
+        image = BackgroundsList.selectBy(id = id)
+        if image.count():
+                image = image.getOne()
+                image.destroySelf()
+                GlobalSettings(selectedImage = -1)
+    return redirect(url_for("index"))
 
 @app.route("/logout/", methods=["GET", "POST"])
 def logout():
@@ -178,4 +192,4 @@ def add_header(response):
     return response
 
 
-app.run(port=8000, host="0.0.0.0", threaded=True, debug=False)
+app.run(port=8000, host="0.0.0.0", threaded=True, debug=True)

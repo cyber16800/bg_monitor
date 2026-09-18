@@ -23,11 +23,14 @@
     {% endif %}
     <div class="image_selector">
         {% for fond in images %}
-            {% if selected == fond.id %}
-                <img onclick="window.location.href = '/bg/{{ fond.id }}';" class="img_item img_selected" src="{{ fond.image }}" />
-            {% else %}
-                <img onclick="window.location.href = '/bg/{{ fond.id }}';" class="img_item" src="{{ fond.image }}" />
-            {% endif %}
+            <div style="position: relative; display: inline-block;">
+                {% if selected == fond.id %}
+                    <img onclick="window.location.href = '/bg/{{ fond.id }}';" class="img_item img_selected" src="{{ fond.image }}" />
+                {% else %}
+                    <img onclick="window.location.href = '/bg/{{ fond.id }}';" class="img_item" src="{{ fond.image }}" />
+                {% endif %}
+                <button onclick="window.location.href = '/bg/{{ fond.id }}/remove';" style="position: absolute; bottom: 12px; right: 5px;">Supprimer</button>
+            </div>
         {% endfor %}
     </div>
 </body>
